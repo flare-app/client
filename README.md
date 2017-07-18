@@ -1,4 +1,4 @@
-# Flare.app Frontend
+# Flare.app client
 
 ## Development environment
 

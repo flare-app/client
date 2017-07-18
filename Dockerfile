@@ -1,6 +1,6 @@
 FROM node:alpine
 
-WORKDIR /flare-app-frontend
+WORKDIR /flare-app-client
 
 COPY . .
 RUN npm install && \
