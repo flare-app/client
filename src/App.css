@@ -22,3 +22,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.vh-100 {
+  height: 100vh;
+}
+
+.app-icon {
+  width: 130px;
+  height: 130px;
+}
