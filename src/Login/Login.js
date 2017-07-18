@@ -12,6 +12,18 @@ class Login extends Component {
 						<div className="card-block">
 							<p className="card-text">Bitte authentifizieren Sie sich.</p>
 							<form>
+							<div className="form-group">
+								<select className="form-control" required={true} defaultValue={""}>
+									<option value="" disabled>Wähle die Stadt deiner Feuerwehr</option>
+									<option value="potsdam">Potsdam</option>
+								</select>
+							</div>
+							<div className="form-group">
+								<select className="form-control" required={true} defaultValue={""}>
+									<option value="" disabled>Wähle deine Einheit</option>
+									<option value="zentrum">Zentrum</option>
+								</select>
+							</div>
 							<div className="form-group row">
 								<div className="col-12">
 									<input className="form-control" 
