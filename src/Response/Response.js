@@ -11,6 +11,9 @@ class Response extends Component {
             <div className="d-flex justify-content-center mb-5">
                 <div className="btn-group btn-group-lg" role="group">
                     <button type="button" className="btn btn-success">
+                        <i className="fa fa-blind fa-walk"></i>
+                    </button>
+                    <button type="button" className="btn btn-success">
                         <i className="fa fa-bicycle"></i>
                     </button>
                     <button type="button" className="btn btn-success">
@@ -19,15 +22,12 @@ class Response extends Component {
                     <button type="button" className="btn btn-success">
                         <i className="fa fa-bus"></i>
                     </button>
-                    <button type="button" className="btn btn-success">
-                        <i className="fa fa-rocket"></i>
-                    </button>
                 </div>
             </div>
             <div className="d-flex justify-content-center mb-5">
                 <div className="btn-group btn-group-lg" role="group">
                     <button type="button" className="btn btn-danger">
-                        Kein Bock. Couch.
+                        Ich komme nicht.
                     </button>
                 </div>
             </div>
