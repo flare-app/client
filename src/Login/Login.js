@@ -4,32 +4,7 @@ import icon from '../resources/app-icon.svg';
 class Login extends Component {
 	constructor() {
 		super();
-		this.constantGeolocation = this.constantGeolocation.bind(this);
-		this.displayCurrentPosition = this.displayCurrentPosition.bind(this);
-		this.state = {
-			clicked: false,
-			location: {
-				latitude: 0,
-				longitude: 0
-			}
-		}
 	}
-
-	sleep(ms) {
-		return new Promise(resolve => setTimeout(resolve, ms));
-	}
-
-	displayCurrentPosition(position) {
-		this.setState({
-			clicked: true,
-			location: position.coords
-		});
-	}
-
-	async constantGeolocation() {
-		navigator.geolocation.getCurrentPosition( this.displayCurrentPosition );
-		await this.sleep(2000);
-		this.constantGeolocation();
 	}
 
 	render() {
@@ -67,19 +42,6 @@ class Login extends Component {
 						<input className="btn btn-success full-width-button" type="submit" value="Login" />
 					</form>
 				</div>
-				<p></p>
-				{!this.state.clicked &&
-					<button type="button" className="btn btn-success" onClick={this.constantGeolocation}>
-						Locate Me!
-					</button>
-				}
-				{this.state.clicked &&
-					<div>
-						<p>I've got ya!</p>
-						<p>lat: {this.state.location.latitude}</p>
-						<p>lon: {this.state.location.longitude}</p>
-					</div>
-				}
 			</div>
 		);
 	}
