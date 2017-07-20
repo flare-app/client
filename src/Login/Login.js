@@ -2,6 +2,22 @@ import React, { Component } from 'react';
 import icon from '../resources/app-icon.svg';
 
 class Login extends Component {
+	constructor() {
+		super();
+		this.onSubmitLogin = this.onSubmitLogin.bind(this);
+	}
+	
+	onSubmitLogin() {
+		if ('serviceWorker' in navigator && 'SyncManager' in window) {
+			navigator.serviceWorker.ready.then(function (reg) {
+				return reg.sync.register('loginSync');
+			}).catch(function (error) {
+				console.log(error);
+				// system was unable to register for a sync,
+				// this could be an OS-level restriction
+			});
+		}
+	}
 
 	render() {
 		return (
@@ -35,7 +51,11 @@ class Login extends Component {
 								   placeholder="Passwort"
 								   required={true} />
 						</div>
-						<input className="btn btn-success full-width-button" type="submit" value="Login" />
+						<input
+							className="btn btn-success full-width-button"
+							type="submit"
+							value="Login"
+							onSubmit={this.onSubmitLogin}/>
 					</form>
 				</div>
 			</div>
