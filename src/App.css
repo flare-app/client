@@ -22,3 +22,49 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.vh-100 {
+  height: 100vh;
+}
+
+.app-icon {
+  width: 130px;
+  height: 130px;
+}
+
+.btn, .btn-group {
+  height: 75px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.btn-success {
+  background-color: #44AF69 !important;
+  border-color: #44AF69 !important;
+}
+
+.btn-danger {
+  background-color: #93032E !important;
+  border-color: #93032E !important;
+}
+
+.fa-walk {
+  position: relative;
+}
+.fa-walk:after {
+  background: #44AF69;
+  bottom: 0;
+  content: '';
+  height: .435em;
+  position: absolute;
+  right: 0;
+  width: .285em;
+}
+
+.fa {
+  font-size: 22px !important;
+}
+
+.no-icon {
+  font-size: 35px !important;
+}
