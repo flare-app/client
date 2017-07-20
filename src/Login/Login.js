@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import icon from '../resources/app-icon.svg';
 
 class Login extends Component {
-	constructor() {
-		super();
-	}
-	}
 
 	render() {
 		return (

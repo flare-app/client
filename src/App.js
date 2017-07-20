@@ -20,18 +20,12 @@ class App extends Component {
 	
 	componentDidMount() {
 		if ('serviceWorker' in navigator && 'SyncManager' in window) {
-			navigator.serviceWorker.register('/bgSyncServiceWorker.js', {
+			const swUrl = `${process.env.PUBLIC_URL}/bgSyncServiceWorker.js`;
+			navigator.serviceWorker.register(swUrl, {
 				scope: '/'
 			})
 			.catch(function(error) {
 				console.log("ServiceWorker Registration failed: " + error);
-			});
-			navigator.serviceWorker.ready.then(function(reg) {
-				return reg.sync.register('tag-name');
-			}).catch(function(error) {
-				console.log(error);
-				// system was unable to register for a sync,
-				// this could be an OS-level restriction
 			});
 		} else {
 			// serviceworker/sync not supported
@@ -47,5 +41,4 @@ class App extends Component {
 		);
 	}
 }
-
 export default App;
