@@ -18,6 +18,18 @@ class App extends Component {
 		};
 	}
 	
+	componentDidMount() {
+		if ('serviceWorker' in navigator && 'SyncManager' in window) {
+			const swUrl = `${process.env.PUBLIC_URL}/bgSyncServiceWorker.js`;
+			navigator.serviceWorker.register(swUrl, {
+				scope: '/'
+			})
+			.catch(function(error) {
+				console.log("ServiceWorker Registration failed: " + error);
+			});
+		}
+	}
+	
 	render() {
 		return (
 			<div className="container-fluid">
@@ -27,5 +39,4 @@ class App extends Component {
 		);
 	}
 }
-
 export default App;
