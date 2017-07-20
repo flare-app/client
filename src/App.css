@@ -38,6 +38,11 @@
   max-width: 400px;
 }
 
+.login-form {
+  width: 400px;
+  max-width: 100%;
+}
+
 .btn-success {
   background-color: #44AF69 !important;
   border-color: #44AF69 !important;
