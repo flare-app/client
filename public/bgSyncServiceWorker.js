@@ -1,5 +1,5 @@
 self.addEventListener('sync', function(event) {
-	if (event.tag == "oneTimeSync") {
-		console.log('Onee Sync event fired');
+	if (event.tag === "oneTimeSync") {
+		console.log('One Sync event fired');
 	}
 });
