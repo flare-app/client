@@ -18,6 +18,26 @@ class App extends Component {
 		};
 	}
 	
+	componentDidMount() {
+		if ('serviceWorker' in navigator && 'SyncManager' in window) {
+			navigator.serviceWorker.register('/bgSyncServiceWorker.js', {
+				scope: '/'
+			})
+			.catch(function(error) {
+				console.log("ServiceWorker Registration failed: " + error);
+			});
+			navigator.serviceWorker.ready.then(function(reg) {
+				return reg.sync.register('tag-name');
+			}).catch(function(error) {
+				console.log(error);
+				// system was unable to register for a sync,
+				// this could be an OS-level restriction
+			});
+		} else {
+			// serviceworker/sync not supported
+		}
+	}
+	
 	render() {
 		return (
 			<div className="container-fluid">
