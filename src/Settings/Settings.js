@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Checkbox from './Checkbox';
-var MD5 = require("crypto-js/md5");
+import config from './../config/config';
+const MD5 = require("crypto-js/md5");
+
 
 class Settings extends Component {
 	constructor() {
@@ -29,8 +31,31 @@ class Settings extends Component {
 		})
 	}
 
-	handleCheckTransportationMode( transportationMode ) {
+	static getFavoriteTransportationModes() {
+		const modes = JSON.parse(window.localStorage.getItem('favoriteTransportationModes'));
+		if (modes) {
+			return modes;
+		}
+		else {
+			return [];
+		}
+	}
+	static setFavoriteTransportationModes(modes) {
+		const modesJson = JSON.stringify(modes);
+		window.localStorage.setItem('favoriteTransportationModes', modesJson);
+	}
 
+	transportationModeIsFavorite(transportationMode) {
+		const modes = this.getFavoriteTransportationModes();
+		return modes.includes(transportationMode);
+	}
+
+	handleCheckTransportationMode( transportationMode ) {
+		let modes = this.getFavoriteTransportationModes();
+		if (!this.transportationModeIsFavorite(transportationMode)) {
+			modes.push(transportationMode);
+		}
+		this.setFavoriteTransportationModes(modes);
 	}
 
 	handleUncheckTransportationMode( transportationMode ) {
@@ -52,33 +77,22 @@ class Settings extends Component {
 
 						<h1>Favorite Transportation Modes</h1>
 
-						<div className="btn-group btn-group-lg" role="group">
-							<Checkbox
-								onCheck={ () => { this.handleCheckTransportationMode('foot') } }
-								onUncheck={ () => { this.handleUncheckTransportationMode('foot') } }>
-								<i className="fa fa-blind"/>
-							</Checkbox>
-							<Checkbox
-								onCheck={ () => { this.handleCheckTransportationMode('bike') } }
-								onUncheck={ () => { this.handleUncheckTransportationMode('bike') } }>
-								<i className="fa fa-bicycle"/>
-							</Checkbox>
-							<Checkbox
-								onCheck={ () => { this.handleCheckTransportationMode('car') } }
-								onUncheck={ () => { this.handleUncheckTransportationMode('car') } }>
-								<i className="fa fa-car"/>
-							</Checkbox>
-							<Checkbox
-								onCheck={ () => { this.handleCheckTransportationMode('bus') } }
-								onUncheck={ () => { this.handleUncheckTransportationMode('bus') } }>
-								<i className="fa fa-bus"/>
-							</Checkbox>
+						<div className="btn-group btn-group-lg mb-5" role="group">
+							{config.transportationModes.map((transportationMode) => {
+								return(
+									<Checkbox
+										checked={ (transportationMode) => { this.transportationModeIsFavorite(transportationMode) } }
+										onCheck={ () => { this.handleCheckTransportationMode(transportationMode) } }
+										onUncheck={ () => { this.handleUncheckTransportationMode(transportationMode) } }>
+										<i className={`fa ${transportationMode.icon}`}/>
+									</Checkbox>
+								);
+							})}
 						</div>
 
-
-						Home GPS
-						Favorite Transportation mode
-						Logout
+						<button type="button" className="btn btn-danger">
+							Logout
+						</button>
 					</div>
 				</div>
 				<div className="d-flex justify-content-center mb-5">
