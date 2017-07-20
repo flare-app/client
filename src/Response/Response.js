@@ -27,7 +27,7 @@ class Response extends Component {
             <div className="d-flex justify-content-center mb-5">
                 <div className="btn-group btn-group-lg" role="group">
                     <button type="button" className="btn btn-danger">
-                        Ich komme nicht.
+                        <i className="no-icon fa fa-times"></i>
                     </button>
                 </div>
             </div>

@@ -60,3 +60,11 @@
   right: 0;
   width: .285em;
 }
+
+.fa {
+  font-size: 22px !important;
+}
+
+.no-icon {
+  font-size: 35px !important;
+}
