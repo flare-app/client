@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import icon from '../resources/app-icon.svg';
+import config from './../config/config';
 
 class Response extends Component {
   render() {
@@ -10,18 +11,13 @@ class Response extends Component {
             </div>
             <div className="d-flex justify-content-center mb-5">
                 <div className="btn-group btn-group-lg" role="group">
-                    <button type="button" className="btn btn-success">
-                        <i className="fa fa-blind fa-walk"/>
-                    </button>
-                    <button type="button" className="btn btn-success">
-                        <i className="fa fa-bicycle"/>
-                    </button>
-                    <button type="button" className="btn btn-success">
-                        <i className="fa fa-car"/>
-                    </button>
-                    <button type="button" className="btn btn-success">
-                        <i className="fa fa-bus"/>
-                    </button>
+                    {config.transportationModes.map((transportationMode) => {
+                        return(
+                            <button type="button" className="btn btn-success">
+                                <i className={`fa ${transportationMode.icon}`} />
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
             <div className="d-flex justify-content-center mb-5">
