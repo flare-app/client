@@ -41,7 +41,7 @@ class Login extends Component {
 									/>
 								</div>
 							</div>
-							<input className="btn btn-primary" type="submit" value="Login" />
+							<input className="btn btn-primary full-width-button" type="submit" value="Login" />
 							</form>
 						</div>
 					</div>

@@ -68,3 +68,9 @@
 .no-icon {
   font-size: 35px !important;
 }
+
+.full-width-button {
+  width: 100%;
+  max-width: 100% !important;
+  height: 50px;
+}
