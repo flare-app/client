@@ -27,9 +27,13 @@
   height: 100vh;
 }
 
-.app-icon {
+.app-icon, .avatar {
   width: 130px;
   height: 130px;
+}
+
+.avatar {
+  border-radius: 50%;
 }
 
 .btn, .btn-group {
