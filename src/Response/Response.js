@@ -11,23 +11,23 @@ class Response extends Component {
             <div className="d-flex justify-content-center mb-5">
                 <div className="btn-group btn-group-lg" role="group">
                     <button type="button" className="btn btn-success">
-                        <i className="fa fa-blind fa-walk"></i>
+                        <i className="fa fa-blind fa-walk"/>
                     </button>
                     <button type="button" className="btn btn-success">
-                        <i className="fa fa-bicycle"></i>
+                        <i className="fa fa-bicycle"/>
                     </button>
                     <button type="button" className="btn btn-success">
-                        <i className="fa fa-car"></i>
+                        <i className="fa fa-car"/>
                     </button>
                     <button type="button" className="btn btn-success">
-                        <i className="fa fa-bus"></i>
+                        <i className="fa fa-bus"/>
                     </button>
                 </div>
             </div>
             <div className="d-flex justify-content-center mb-5">
                 <div className="btn-group btn-group-lg" role="group">
                     <button type="button" className="btn btn-danger">
-                        <i className="no-icon fa fa-times"></i>
+                        <i className="no-icon fa fa-times"/>
                     </button>
                 </div>
             </div>
