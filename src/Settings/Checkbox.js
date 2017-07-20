@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 class Checkbox extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-			checked: false
+			checked: props.default
 		};
 		this.check = this.check.bind(this);
 		this.uncheck = this.uncheck.bind(this);

@@ -13,6 +13,7 @@ class Settings extends Component {
 				avatarUrl: ''
 			}
 		};
+		this.transportationModeIsFavorite = this.transportationModeIsFavorite.bind(this);
 		this.handleCheckTransportationMode = this.handleCheckTransportationMode.bind(this);
 		this.handleUncheckTransportationMode = this.handleUncheckTransportationMode.bind(this);
 	}
@@ -46,20 +47,29 @@ class Settings extends Component {
 	}
 
 	transportationModeIsFavorite(transportationMode) {
-		const modes = this.getFavoriteTransportationModes();
-		return modes.includes(transportationMode);
+		const modes = Settings.getFavoriteTransportationModes();
+		return modes.findIndex(i => i.name === transportationMode.name) >= 0;
 	}
 
 	handleCheckTransportationMode( transportationMode ) {
-		let modes = this.getFavoriteTransportationModes();
+		let modes = Settings.getFavoriteTransportationModes();
 		if (!this.transportationModeIsFavorite(transportationMode)) {
 			modes.push(transportationMode);
 		}
-		this.setFavoriteTransportationModes(modes);
+		Settings.setFavoriteTransportationModes(modes);
 	}
 
 	handleUncheckTransportationMode( transportationMode ) {
-
+		let modes = Settings.getFavoriteTransportationModes();
+		console.log(transportationMode);
+		console.log(modes);
+		if (this.transportationModeIsFavorite(transportationMode)) {
+			const i = modes.findIndex(i => i.name === transportationMode.name);
+			if(i >= -1) {
+				modes.splice(i, 1);
+			}
+		}
+		Settings.setFavoriteTransportationModes(modes);
 	}
 
 	render() {
@@ -81,7 +91,7 @@ class Settings extends Component {
 							{config.transportationModes.map((transportationMode) => {
 								return(
 									<Checkbox
-										checked={ (transportationMode) => { this.transportationModeIsFavorite(transportationMode) } }
+										default={ this.transportationModeIsFavorite(transportationMode) }
 										onCheck={ () => { this.handleCheckTransportationMode(transportationMode) } }
 										onUncheck={ () => { this.handleUncheckTransportationMode(transportationMode) } }>
 										<i className={`fa ${transportationMode.icon}`}/>
