@@ -27,8 +27,6 @@ class App extends Component {
 			.catch(function(error) {
 				console.log("ServiceWorker Registration failed: " + error);
 			});
-		} else {
-			// serviceworker/sync not supported
 		}
 	}
 	
