@@ -52,21 +52,17 @@ class Login extends Component {
 								<option value="zentrum">Zentrum</option>
 							</select>
 						</div>
-						<div className="form-group row">
-							<div className="col-12">
-								<input className="form-control"
-									   type="email"
-									   placeholder="E-Mail"
-									   required={true} />
-							</div>
+						<div className="form-group">
+							<input className="form-control"
+								   type="email"
+								   placeholder="E-Mail"
+								   required={true} />
 						</div>
-						<div className="form-group row mb-4">
-							<div className="col-12">
-								<input className="form-control"
-									   type="password"
-									   placeholder="Passwort"
-									   required={true} />
-							</div>
+						<div className="form-group mb-4">
+							<input className="form-control"
+								   type="password"
+								   placeholder="Passwort"
+								   required={true} />
 						</div>
 						<input className="btn btn-success full-width-button" type="submit" value="Login" />
 					</form>
@@ -81,7 +77,7 @@ class Login extends Component {
 					<div>
 						<p>I've got ya!</p>
 						<p>lat: {this.state.location.latitude}</p>
-						<p>lon: {this.state.location.latitude}</p>
+						<p>lon: {this.state.location.longitude}</p>
 					</div>
 				}
 			</div>
