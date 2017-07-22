@@ -2,21 +2,28 @@ import React, { Component } from 'react';
 import icon from '../resources/app-icon.svg';
 
 class Login extends Component {
+	
 	constructor() {
 		super();
+		this.state = {
+			email: '',
+			password: ''
+		};
 		this.onSubmitLogin = this.onSubmitLogin.bind(this);
+		this.handlePasswordChange = this.handlePasswordChange.bind(this);
+		this.handleEmailChange = this.handleEmailChange.bind(this);
 	}
 	
-	onSubmitLogin() {
-		if ('serviceWorker' in navigator && 'SyncManager' in window) {
-			navigator.serviceWorker.ready.then(function (reg) {
-				return reg.sync.register('loginSync');
-			}).catch(function (error) {
-				console.log(error);
-				// system was unable to register for a sync,
-				// this could be an OS-level restriction
-			});
-		}
+	handlePasswordChange(event) {
+		this.setState({password: event.target.value});
+	}
+	
+	handleEmailChange(event) {
+		this.setState({email: event.target.value});
+	}
+	
+	onSubmitLogin(event) {
+		event.preventDefault();
 	}
 
 	render() {
@@ -26,7 +33,7 @@ class Login extends Component {
 					<img src={icon} className="app-icon" alt="icon" />
 				</div>
 				<div className="d-flex justify-content-center">
-					<form className="login-form">
+					<form className="login-form" onSubmit={this.onSubmitLogin}>
 						<div className="form-group">
 							<select className="form-control" required={true} defaultValue={""}>
 								<option value="" disabled>Wähle die Stadt deiner Feuerwehr</option>
@@ -43,19 +50,22 @@ class Login extends Component {
 							<input className="form-control"
 								   type="email"
 								   placeholder="E-Mail"
-								   required={true} />
+								   required={true}
+								   onChange={this.handleEmailChange}
+								   value={this.state.email}/>
 						</div>
 						<div className="form-group mb-4">
 							<input className="form-control"
 								   type="password"
 								   placeholder="Passwort"
-								   required={true} />
+								   onChange={this.handlePasswordChange}
+								   required={true}
+								   value={this.state.password} />
 						</div>
 						<input
 							className="btn btn-success full-width-button"
 							type="submit"
-							value="Login"
-							onSubmit={this.onSubmitLogin}/>
+							value="Login"/>
 					</form>
 				</div>
 			</div>
