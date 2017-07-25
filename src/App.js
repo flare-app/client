@@ -24,7 +24,8 @@ class App extends Component {
 		}
 		this.state = {
 			authToken: window.localStorage.authToken,
-			isLoggedIn: !!window.localStorage.authToken
+			isLoggedIn: !!window.localStorage.authToken,
+			passwordExpired: false
 		};
 	}
 	
@@ -32,10 +33,17 @@ class App extends Component {
 		this.setState({isLoggedIn: !this.state.isLoggedIn});
 	}
 	
+	setPasswordExpired(bool) {
+		this.setState({setPasswordExpired: bool});
+	}
+	
 	render() {
 		return (
 			<div className="container-fluid">
-				{!this.state.isLoggedIn && <Login onSuccessfulLogin={this.changeLoginState}/>}
+				{!this.state.isLoggedIn && <Login 
+					onSuccessfulLogin={this.changeLoginState}
+					onPasswordChangeRequired={this.setPasswordExpired} 
+				/>}
 				{!this.state.isLoggedIn && <Response authToken={this.state.authToken}/>}
 			</div>
 		);
