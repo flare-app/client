@@ -11,6 +11,8 @@ require('font-awesome/css/font-awesome.min.css');
 class App extends Component {
 	
 	constructor(props) {
+		super(props);
+		this.changeLoginState = this.changeLoginState.bind(this);
 		if ('serviceWorker' in navigator) {
 			const swUrl = `${process.env.PUBLIC_URL}/bgSyncServiceWorker.js`;
 			navigator.serviceWorker.register(swUrl, {scope: '/'}).then(function(registration) {
@@ -20,18 +22,21 @@ class App extends Component {
 				console.log('ServiceWorker registration failed: ', err);
 			});
 		}
-		super(props);
 		this.state = {
 			authToken: window.localStorage.authToken,
 			isLoggedIn: !!window.localStorage.authToken
 		};
 	}
 	
+	changeLoginState() {
+		this.setState({isLoggedIn: !this.state.isLoggedIn});
+	}
+	
 	render() {
 		return (
 			<div className="container-fluid">
-				{!this.state.isLoggedIn && <Login/>}
-				{!this.state.isLoggedIn && <Response/>}
+				{!this.state.isLoggedIn && <Login onSuccessfulLogin={this.changeLoginState}/>}
+				{!this.state.isLoggedIn && <Response authToken={this.state.authToken}/>}
 			</div>
 		);
 	}
