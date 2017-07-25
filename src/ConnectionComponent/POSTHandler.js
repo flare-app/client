@@ -7,17 +7,19 @@ class POSTHandler {
 			body: JSON.stringify(postData)
 		}).then(function(response) {
 			if(response.status === 200) {
-				return response.json();
+				response.json().then(function(responseObject) {
+					responseHandler(responseObject);
+				})
 			} else {
-				errorHandler('Login error', 'Could not validate credentials');
+				response.json().then(function(responseObject) {
+					errorHandler('Login error', responseObject.message);
+				});
 				throw new Error("Authentication Error");
 			}
 		}, function(reason) {
 			//Error
 			console.log(reason);
 			errorHandler('Server error', reason.message);
-		}).then(function(responseObject) {
-			responseHandler(responseObject);
 		}).catch(function(reason) {
 			console.log(reason);
 		});

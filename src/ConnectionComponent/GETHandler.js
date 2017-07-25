@@ -4,19 +4,23 @@ class GETHandler {
 	static performGetRequest(apiRoute, errorHandler, responseHandler) {
 		fetch(config.backendAPIRoute + apiRoute)
 			.then(function(response) {
-				if (response.status >= 400) {
-					errorHandler('Server error (' + apiRoute + ')', 'Server unreachable (' + response.status + ')');
-					throw new Error("Bad response from server");
+				if(response.status === 200) {
+					response.json().then(function(responseObject) {
+						responseHandler(responseObject);
+					})
+				} else {
+					response.json().then(function(responseObject) {
+						errorHandler('Server error (' + apiRoute + ')', responseObject.message);
+						throw new Error("Bad response from server");
+					});
+					throw new Error("Authentication Error");
 				}
-				return response.json();
 			}, function(reason) {
 				//Error
 				errorHandler('Server error (' + apiRoute + ')', reason.message);
 				throw new Error(reason.message);
 			})
-			.then(function(responseObject) {
-				responseHandler(responseObject);
-			}).catch(function(reason) {
+			.catch(function(reason) {
 				console.log(reason);
 			});
 	}
