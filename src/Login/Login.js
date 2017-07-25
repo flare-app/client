@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import icon from '../resources/app-icon.svg';
-import config from '../config/config.js';
+import POSTHandler from '../ConnectionComponent/POSTHandler.js'
 import GETHandler from '../ConnectionComponent/GETHandler.js';
 class Login extends Component {
 	
@@ -52,32 +52,21 @@ class Login extends Component {
 	}
 	
 	onSubmitLogin(event) {
-		const that = this;
-		fetch(config.backendAPIRoute + 'login', {
-			method: 'post',
-			body: JSON.stringify({
-				email: this.state.email,
-				password: this.state.password,
-				unitName: this.state.unitName,
-				unitCity: this.state.unitCity
-			})
-		}).then(function(response) {
-			if(response.status === 200) {
-				return response.json();
-			} else {
-				that.handleServerError('Login error', 'Could not validate credentials');
-				throw new Error("Authentication Error");
-			}
-		}, function(reason) {
-			//Error
-			console.log(reason);
-			that.handleServerError('Server error', reason.message);
-		}).then(function(responseObject) {
-			window.localStorage.setItem('authToken', responseObject.authenticationToken);
-		}).catch(function(reason) {
-			console.log(reason);
-		});
 		event.preventDefault();
+		const postData = {
+			email: this.state.email,
+			password: this.state.password,
+			unitName: this.state.unitName,
+			unitCity: this.state.unitCity
+		};
+		POSTHandler.performPOSTRequest('login', postData, this.handleServerError, (response) => {
+			window.localStorage.setItem('authToken', response.authenticationToken);
+			if(response.passwordExpires) {
+				this.props.passwordChangeRequired(true);
+			} else {
+				this.props.onSuccessfulLogin();
+			}
+		});
 	}
 	
 	getCities() {
