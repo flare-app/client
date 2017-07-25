@@ -31,13 +31,12 @@ class App extends Component {
 			passwordExpired: false
 		};
 	}
-	
-	changeLoginState() {
-		this.setState({isLoggedIn: !this.state.isLoggedIn});
+
+	setUserLogedIn(bool) {
+		this.setState({isLoggedIn: bool});
 	}
 	
 	setPasswordExpired(bool) {
-		this.setState({setPasswordExpired: bool});
 		this.setState({passwordExpired: bool});
 	}
 	
