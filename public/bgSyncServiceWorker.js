@@ -14,11 +14,10 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('message', event => {
-	if(event.data.type === 'response') {
-		const id = uuidv4();
-		syncStore[id] = {type: 'response', data: event.data};
-		self.registration.sync.register(id)
-	}
+	const id = uuidv4();
+	const responseData = event.data;
+	syncStore[id] = {type: event.data.type, data: responseData};
+	self.registration.sync.register(id);
 });
 
 self.addEventListener('sync', event => {
@@ -26,6 +25,16 @@ self.addEventListener('sync', event => {
 	const {type, data} = syncStore[event.tag];
 	if(type === 'response') {
 		event.waitUntil(fetch('/repsonse/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Accept': 'application/json',
+				'X-Requested-With': 'XMLHttpRequest',
+				'Content-Type': 'application/json'
+			}
+		}));
+	} else if(type === 'mistake') {
+		event.waitUntil(fetch('/mistake/', {
 			method: 'POST',
 			body: JSON.stringify(data),
 			headers: {
