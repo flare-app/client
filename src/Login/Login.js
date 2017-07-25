@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import icon from '../resources/app-icon.svg';
 import POSTHandler from '../ConnectionComponent/POSTHandler.js'
 import GETHandler from '../ConnectionComponent/GETHandler.js';
+import SubmitButton from '../Utils/SubmitButton.js';
+
 class Login extends Component {
 	
 	constructor() {
@@ -135,10 +137,9 @@ class Login extends Component {
 								   required={true}
 								   value={this.state.password} />
 						</div>
-						<input
-							className="btn btn-success full-width-button"
-							type="submit"
-							value="Login"/>
+						<SubmitButton
+							lable="Login" 
+							loading={this.state.loading} />
 					</form>
 				</div>
 			</div>
