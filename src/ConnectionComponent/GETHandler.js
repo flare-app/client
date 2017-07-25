@@ -6,7 +6,7 @@ class GETHandler {
 			.then(function(response) {
 				if(response.status === 200) {
 					response.json().then(function(responseObject) {
-						responseHandler(responseObject);
+						responseHandler(responseObject.response);
 					})
 				} else {
 					response.json().then(function(responseObject) {

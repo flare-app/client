@@ -8,9 +8,13 @@ class POSTHandler {
 		}).then(function(response) {
 			if(response.status === 200) {
 				response.json().then(function(responseObject) {
-					responseHandler(responseObject);
+					responseHandler(responseObject.response);
 				})
-			} else {
+			} else if(response.status === 404) {
+				errorHandler('Configuration Error', 'Invalid REST-Route');
+				throw new Error("REST Route invalid");
+			}
+			else {
 				response.json().then(function(responseObject) {
 					errorHandler('Login error', responseObject.message);
 				});
