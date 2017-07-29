@@ -1,3 +1,4 @@
+const syncStore = {}; //data sink to transfer data between message and sync events in service worker
 /**
  * Generates random ids in uuid-format
  * @return {String} uuid
@@ -8,7 +9,6 @@ function uuid() {
 		(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
 	)
 }
-const syncStore = {};
 
 self.addEventListener('install', function(event) {
 	event.waitUntil(self.skipWaiting()); // Activate worker immediately
