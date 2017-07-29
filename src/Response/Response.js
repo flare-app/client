@@ -13,7 +13,7 @@ class Response extends Component {
 	handleSubmitMistake() {
 		if ('serviceWorker' in navigator) {
 			const response = {
-				authToke: this.props.authToken,
+				authToken: this.props.authToken,
 			};
 			this.sendData('mistake', response);
 			this.setState({dataSent: false});
@@ -25,7 +25,7 @@ class Response extends Component {
 			const response = {
 				willAppear: willAppear,
 				transportation: transportation,
-				authToke: this.props.authToken,
+				authToken: this.props.authToken,
 				geoLocation: window.localStorage.geoLocation
 			};
 			this.sendData('response', response);
