@@ -1,4 +1,9 @@
-function uuidv4() {
+/**
+ * Generates random ids in uuid-format
+ * @return {String} uuid
+ * Source/Credit: https://stackoverflow.com/questions/105034/ and https://gist.github.com/jed/982883 
+ */
+function uuid() {
 	return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
 		(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
 	)
@@ -14,7 +19,7 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('message', event => {
-	const id = uuidv4();
+	const id = uuid();
 	const responseData = event.data;
 	syncStore[id] = {type: event.data.type, data: responseData};
 	self.registration.sync.register(id);
