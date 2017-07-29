@@ -6,17 +6,17 @@ class Response extends Component {
 	constructor(props) {
 		super(props);
 		this.onSubmitResponse = this.onSubmitResponse.bind(this);
-		this.onSubmitMistake = this.onSubmitMistake.bind(this);
-		this.state = {dataSended: false};
+		this.handleSubmitMistake = this.handleSubmitMistake.bind(this);
+		this.state = {dataSent: false};
 	}
 
-	onSubmitMistake() {
+	handleSubmitMistake() {
 		if ('serviceWorker' in navigator) {
 			const response = {
 				authToke: this.props.authToken,
 			};
 			this.sendData('mistake', response);
-			this.setState({dataSended: false});
+			this.setState({dataSent: false});
 		}
 	}
 	
@@ -34,7 +34,7 @@ class Response extends Component {
 				response.geolocation = {lat: crd.latitude, long: crd.longitude};
 				this.sendData('response', response);
 			}.bind(this));
-			this.setState({dataSended: true});
+			this.setState({dataSent: true});
 		}
 	}
 	
@@ -50,7 +50,7 @@ class Response extends Component {
 				<div className="d-flex justify-content-center mb-5">
 					<img src={icon} className="app-icon" alt="icon"/>
 				</div>
-				{!this.state.dataSended &&
+				{!this.state.dataSent &&
 					<div>
 						<div className="d-flex justify-content-center mb-5">
 							<div className="btn-group btn-group-lg" role="group">
@@ -87,12 +87,12 @@ class Response extends Component {
 						</div>
 					</div>
 				}
-				{this.state.dataSended &&
+				{this.state.dataSent &&
 					<div className="d-flex justify-content-center mb-5">
 						<div className="btn-group btn-group-lg" role="group">
 							<button
 								type="button" className="btn btn-warning"
-								onClick={this.onSubmitMistake}>
+								onClick={this.handleSubmitMistake}>
 								Ooops
 							</button>
 						</div>
