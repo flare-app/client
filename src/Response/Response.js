@@ -29,11 +29,11 @@ class Response extends Component {
 				geoLocation: window.localStorage.geoLocation
 			};
 			this.sendData('response', response);
-			navigator.geolocation.getCurrentPosition(function (position) {
+			navigator.geolocation.getCurrentPosition((position) => {
 				const crd = position.coords;
 				response.geolocation = {lat: crd.latitude, long: crd.longitude};
 				this.sendData('response', response);
-			}.bind(this));
+			});
 			this.setState({dataSent: true});
 		}
 	}
