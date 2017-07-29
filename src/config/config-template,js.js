@@ -1,4 +1,4 @@
 const config = {
-	backendAPIRoute: 'http://<ip>:<port>/api/user/'
+	backendAPIRoute: 'https://flare-resq.de/api/user'
 };
 export default config;
