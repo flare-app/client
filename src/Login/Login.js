@@ -9,7 +9,7 @@ class Login extends Component {
 			email: '',
 			password: ''
 		};
-		this.onSubmitLogin = this.onSubmitLogin.bind(this);
+		this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 	}
@@ -21,8 +21,8 @@ class Login extends Component {
 	handleEmailChange(event) {
 		this.setState({email: event.target.value});
 	}
-	
-	onSubmitLogin(event) {
+
+	handleSubmitLogin(event) {
 		event.preventDefault();
 	}
 
@@ -33,7 +33,7 @@ class Login extends Component {
 					<img src={icon} className="app-icon" alt="icon" />
 				</div>
 				<div className="d-flex justify-content-center">
-					<form className="login-form" onSubmit={this.onSubmitLogin}>
+					<form className="login-form" onSubmit={this.handleSubmitLogin}>
 						<div className="form-group">
 							<select className="form-control" required={true} defaultValue={""}>
 								<option value="" disabled>Wähle die Stadt deiner Feuerwehr</option>
