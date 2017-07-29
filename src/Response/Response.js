@@ -5,7 +5,7 @@ class Response extends Component {
 	
 	constructor(props) {
 		super(props);
-		this.onSubmitResponse = this.onSubmitResponse.bind(this);
+		this.handleSubmitResponse = this.handleSubmitResponse.bind(this);
 		this.handleSubmitMistake = this.handleSubmitMistake.bind(this);
 		this.state = {dataSent: false};
 	}
@@ -19,8 +19,8 @@ class Response extends Component {
 			this.setState({dataSent: false});
 		}
 	}
-	
-	onSubmitResponse(willAppear, transportation) {
+
+	handleSubmitResponse(willAppear, transportation) {
 		if ('serviceWorker' in navigator) {
 			const response = {
 				willAppear: willAppear,
@@ -56,22 +56,22 @@ class Response extends Component {
 							<div className="btn-group btn-group-lg" role="group">
 								<button
 									type="button" className="btn btn-success"
-									onClick={this.onSubmitResponse.bind(this, true, 'walk')}>
+									onClick={this.handleSubmitResponse.bind(this, true, 'walk')}>
 									<i className="fa fa-blind fa-walk"/>
 								</button>
 								<button
 									type="button" className="btn btn-success"
-									onClick={this.onSubmitResponse.bind(this, true, 'bike')}>
+									onClick={this.handleSubmitResponse.bind(this, true, 'bike')}>
 									<i className="fa fa-bicycle"/>
 								</button>
 								<button
 									type="button" className="btn btn-success"
-									onClick={this.onSubmitResponse.bind(this, true, 'car')}>
+									onClick={this.handleSubmitResponse.bind(this, true, 'car')}>
 									<i className="fa fa-car"/>
 								</button>
 								<button
 									type="button" className="btn btn-success"
-									onClick={this.onSubmitResponse.bind(this, true, 'publicTransport')}>
+									onClick={this.handleSubmitResponse.bind(this, true, 'publicTransport')}>
 									<i className="fa fa-bus"/>
 								</button>
 							</div>
@@ -80,7 +80,7 @@ class Response extends Component {
 							<div className="btn-group btn-group-lg" role="group">
 								<button
 									type="button" className="btn btn-danger"
-									onClick={this.onSubmitResponse.bind(this, false, 'none')}>
+									onClick={this.handleSubmitResponse.bind(this, false, 'none')}>
 									<i className="no-icon fa fa-times"/>
 								</button>
 							</div>
