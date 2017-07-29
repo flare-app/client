@@ -1,4 +1,10 @@
 const syncStore = {}; //data sink to transfer data between message and sync events in service worker
+const TRANSFER_PROTOCOL = 'POST';
+const TRANSFER_HEADERS = {
+	'Accept': 'application/json', 
+	'X-Requested-With': 'XMLHttpRequest', 
+	'Content-Type': 'application/json'
+};
 /**
  * Generates random ids in uuid-format
  * @return {String} uuid
@@ -30,23 +36,15 @@ self.addEventListener('sync', event => {
 	const {type, data} = syncStore[event.tag];
 	if(type === 'response') {
 		event.waitUntil(fetch('/repsonse/', {
-			method: 'POST',
+			method: TRANSFER_PROTOCOL,
 			body: JSON.stringify(data),
-			headers: {
-				'Accept': 'application/json',
-				'X-Requested-With': 'XMLHttpRequest',
-				'Content-Type': 'application/json'
-			}
+			headers: TRANSFER_HEADERS
 		}));
 	} else if(type === 'mistake') {
 		event.waitUntil(fetch('/mistake/', {
-			method: 'POST',
+			method: TRANSFER_PROTOCOL,
 			body: JSON.stringify(data),
-			headers: {
-				'Accept': 'application/json',
-				'X-Requested-With': 'XMLHttpRequest',
-				'Content-Type': 'application/json'
-			}
+			headers: TRANSFER_HEADERS
 		}));
 	}
 });
