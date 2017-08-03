@@ -46,7 +46,7 @@ class Login extends Component {
 		this.setState({unit: JSON.parse(event.target.value)});
 	}
 	
-	onSubmitLogin(event) {
+	handleSubmitLogin(event) {
 		event.preventDefault();
 		this.setState({loading: true});
 		const postData = {
@@ -83,7 +83,7 @@ class Login extends Component {
 					<img src={icon} className="app-icon" alt="icon" />
 				</div>
 				<div className="d-flex justify-content-center">
-					<form className="login-form" onSubmit={this.onSubmitLogin}>
+					<form className="login-form" onSubmit={this.handleSubmitLogin}>
 						{this.state.serverError.occurred &&
 							<div className="alert alert-danger" role="alert">
 								<strong>{this.state.serverError.type}: </strong> {this.state.serverError.message}
