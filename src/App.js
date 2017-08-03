@@ -11,6 +11,15 @@ require('font-awesome/css/font-awesome.min.css');
 class App extends Component {
 	
 	constructor(props) {
+		if ('serviceWorker' in navigator) {
+			const swUrl = `${process.env.PUBLIC_URL}/bgSyncServiceWorker.js`;
+			navigator.serviceWorker.register(swUrl, {scope: '/'}).then(function(registration) {
+				console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				return navigator.serviceWorker.ready;
+			}, function(err) {
+				console.log('ServiceWorker registration failed: ', err);
+			});
+		}
 		super(props);
 		this.state = {
 			authToken: window.localStorage.authToken,
@@ -18,23 +27,11 @@ class App extends Component {
 		};
 	}
 	
-	componentDidMount() {
-		if ('serviceWorker' in navigator && 'SyncManager' in window) {
-			const swUrl = `${process.env.PUBLIC_URL}/bgSyncServiceWorker.js`;
-			navigator.serviceWorker.register(swUrl, {
-				scope: '/'
-			})
-			.catch(function(error) {
-				console.log("ServiceWorker Registration failed: " + error);
-			});
-		}
-	}
-	
 	render() {
 		return (
 			<div className="container-fluid">
 				{!this.state.isLoggedIn && <Login/>}
-				{this.state.isLoggedIn && <Response/>}
+				{!this.state.isLoggedIn && <Response/>}
 			</div>
 		);
 	}
